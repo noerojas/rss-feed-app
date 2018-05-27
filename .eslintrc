@@ -57,8 +57,17 @@
     "react/jsx-curly-spacing": [
       2,
       {
-        "when": "always",
+        "when": "never",
         "children": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     ],
     "import/no-extraneous-dependencies": [
