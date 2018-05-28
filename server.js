@@ -36,7 +36,10 @@ app.post('/search', async (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const query = search
+  // Remove leading and trailing white spaces
+  // Remove extra white spaces in between words if any
+  // Transform to lower case letters
+  const searchQuery = search
     .trim()
     .replace(/\s+/g, ' ')
     .toLowerCase();
@@ -45,47 +48,11 @@ app.post('/search', async (req, res) => {
   const data = await getRssFeeds(rssFeeds);
 
   // Search rss feeds
-  const searchResults = searchRssFeeds(data, query);
+  const searchResults = searchRssFeeds(data, searchQuery);
 
-  // console.log('Data:', data);
-  return res.json(data);
+  // Respond the search results in json format
+  return res.json(searchResults);
 });
-
-// async () => {
-//   // Object
-//   const feed = await parser.parseURL('https://www.npr.org/rss/rss.php?id=1001');
-//   // console.log(feed);
-
-//   const titles = [];
-//   const descriptions = [];
-
-//   // feed.items.forEach(item => {
-//   //   console.log('FEED:______________________');
-//   //   console.log(`Title: ${item.title}`);
-//   //   console.log(`Link: ${item.link}`);
-//   //   console.log(`Content: ${item.content}`);
-
-//   //   titles
-//   //   console.log('\n');
-//   //   console.log('\n');
-//   // });
-
-//   for (let i = 0; i < feed.items.length; i += 1) {
-//     titles[i] = feed.items[i].title;
-//   }
-//   console.log(titles);
-
-//   const search = " you're  ";
-//   const query = search
-//     .trim()
-//     .replace(/\s+/g, ' ')
-//     .toLowerCase();
-
-//   console.log(query);
-
-//   const searchResults = titles.map(index => index.toLowerCase().indexOf(query) > -1);
-//   console.log(searchResults);
-// });
 
 // You can manually set the port in .env file or default to port 5000
 const port = process.env.PORT || 5000;
