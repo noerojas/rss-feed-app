@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
 header {
   background-color: #546e7a;
   color: white;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  padding-top: 10px;
   padding-left: 10px;
 }
 
@@ -15,4 +18,16 @@ h4 {
 
 h5 {
   font-size: 15px;
+}
+
+footer {
+  background-color: #546e7a;
+  padding-bottom: 20px;
+  padding-top: 15px;
+}
+
+.no-matches {
+  padding-left: 15px;
+  font-family: 'Amatic SC', sans-serif;
+  font-size: 18px;
 }

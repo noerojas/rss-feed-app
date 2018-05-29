@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import axios from 'axios';
-// import classnames from 'classnames';
 
 import Article from './Article';
 
@@ -52,7 +51,12 @@ class Search extends Component {
   }
 
   render() {
-    const isNprSet = this.state.nprSearchResults.length > 0 ? this.state.nprSearchResults : "No Matches";
+    const { nprSearchResults, bbcSearchResults, cnnSearchResults } = this.state;
+    const noMatchesFound = (foundArticles) => {
+      if (foundArticles.length === 0) {
+        return <p className="no-matches">No Matches Found</p>;
+      }
+    }
     return (
       <div className="container">
         <div className="row">
@@ -72,32 +76,33 @@ class Search extends Component {
                   type="text"
                 />
                 <label htmlFor="rss-search">Search</label>
-                <span className="helper-text" data-error="wrong" data-success="right">
-                  Helper text
-                </span>
               </div>
             </div>
           </form>
         </div>
         {/* Insert Found Articles here .... */}
-        <h4>NPR News RSS</h4>
+        <h4>NPR News</h4>
         <ul className="collection">
-          {this.state.nprSearchResults.map((key, index) => (
+          {nprSearchResults.map((key, index) => (
             <Article key={index} details={key} />
           ))}
-          {isNprSet}
+          {noMatchesFound(nprSearchResults)}
         </ul>
-        <h4>BBC News RSS</h4>
+        <br />
+        <h4>BBC News</h4>
         <ul className="collection">
-          {this.state.bbcSearchResults.map((key, index) => (
+          {bbcSearchResults.map((key, index) => (
             <Article key={index} details={key} />
           ))}
+          {noMatchesFound(bbcSearchResults)}
         </ul>
-        <h4>CNN RSS Feed</h4>
+        <br />
+        <h4>CNN News</h4>
         <ul className="collection">
-          {this.state.cnnSearchResults.map((key, index) => (
+          {cnnSearchResults.map((key, index) => (
             <Article key={index} details={key} />
           ))}
+          {noMatchesFound(cnnSearchResults)}
         </ul>
       </div>
     );

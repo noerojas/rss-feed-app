@@ -10,6 +10,7 @@ const App = () => (
   <React.Fragment>
     <Header />
     <Search />
+    <Footer />
   </React.Fragment>
 );
 

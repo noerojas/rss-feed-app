@@ -1,19 +1,17 @@
-function searchTitles(data, searchQuery) {
-  const results = data.map(item => item.title.toLowerCase().indexOf(searchQuery) > -1);
-  return results;
-}
+// Return a boolean array with found partial title matches
+const searchTitles = (data, searchQuery) =>
+  data.map(item => item.title.toLowerCase().indexOf(searchQuery) > -1);
 
-function searchContent(data, searchQuery) {
-  const results = data.map(item => item.content.toLowerCase().indexOf(searchQuery) > -1);
-  return results;
-}
+// Return a boolean array with found partial content matches
+const searchContent = (data, searchQuery) =>
+  data.map(item => item.content.toLowerCase().indexOf(searchQuery) > -1);
 
-function noDuplicates(titles, content) {
-  const results = titles.map((item, index) => item || content[index]);
-  return results;
-}
+// Return a boolean array with with combined titles and content matches
+const noDuplicates = (titles, content) =>
+  titles.map((item, index) => item || content[index]);
 
-function getSearchResults(uniqueResults, rssItems) {
+// Returns an new array with found search results
+const getSearchResults = (uniqueResults, rssItems) => {
   const searchResults = [];
   for (let i = 0; i < uniqueResults.length; i += 1) {
     if (uniqueResults[i]) {
@@ -21,7 +19,7 @@ function getSearchResults(uniqueResults, rssItems) {
     }
   }
   return searchResults;
-}
+};
 
 function searchRssFeeds(data, searchQuery) {
   const searchResults = {};
