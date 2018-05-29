@@ -29,8 +29,9 @@ const rssFeeds = [
 // @desc    Fetches & searches rss feeds
 // @access  Public
 app.post('/search', async (req, res) => {
-  const { search } = req.body;
-  const { errors, valid } = validateSearchInput(search);
+  console.log(req.body.searchQuery);
+  const { searchQuery } = req.body;
+  const { errors, valid } = validateSearchInput(searchQuery);
 
   if (!valid) {
     return res.status(400).json(errors);
@@ -39,7 +40,7 @@ app.post('/search', async (req, res) => {
   // Remove leading and trailing white spaces
   // Remove extra white spaces in between words if any
   // Transform to lower case letters
-  const searchQuery = search
+  const search = searchQuery
     .trim()
     .replace(/\s+/g, ' ')
     .toLowerCase();
@@ -48,7 +49,7 @@ app.post('/search', async (req, res) => {
   const data = await getRssFeeds(rssFeeds);
 
   // Search rss feeds
-  const searchResults = searchRssFeeds(data, searchQuery);
+  const searchResults = searchRssFeeds(data, search);
 
   // Respond the search results in json format
   return res.json(searchResults);
