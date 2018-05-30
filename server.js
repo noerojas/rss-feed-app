@@ -1,6 +1,7 @@
 // Requiring Node Modules
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // User validation input
 const validateSearchInput = require('./validation/search');
@@ -14,6 +15,9 @@ const searchRssFeeds = require('./functions/search-data');
 // Initializing Express
 const app = express();
 
+// Serve static files from the client directory
+app.use(express.static(`${__dirname}/client`));
+
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,6 +28,13 @@ const rssFeeds = [
   'http://feeds.bbci.co.uk/news/rss.xml',
   'http://rss.cnn.com/rss/cnn_topstories.rss'
 ];
+
+// @route   GET /
+// @desc    Serves static index.html
+// @access  Public
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+});
 
 // @route   POST /search
 // @desc    Fetches & searches rss feeds

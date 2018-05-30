@@ -47,7 +47,7 @@ class Search extends Component {
       })
       .catch(err => this.setState({ errors: err.response.data }));
 
-    console.log('errors', this.state.errors);
+    console.log(this.state.nprSearchResults);
   }
 
   render() {
